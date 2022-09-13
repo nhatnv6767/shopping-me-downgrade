@@ -13,11 +13,14 @@ export const selectCategories = createSelector(
 
 export const selectCategoriesMap = createSelector(
     [selectCategories],
-    (categories) => categories.reduce(
-        (acc, {title, items}) => {
-            acc[title.toLowerCase()] = items;
-            return acc;
-        },
-        {}
-    )
+    (categories) => {
+        console.log("Selector fired")
+        return categories.reduce(
+            (acc, {title, items}) => {
+                acc[title.toLowerCase()] = items;
+                return acc;
+            },
+            {}
+        )
+    }
 )
