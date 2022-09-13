@@ -7,6 +7,10 @@ export const selectCategories = createSelector(
     (categoriesSlice) => categoriesSlice.categories
 )
 
+/*
+ Miễn là mảng categories không thay đổi, đừng chạy lại phương thức này
+* */
+
 export const selectCategoriesMap = createSelector(
     [selectCategories],
     (categories) => categories.reduce(
