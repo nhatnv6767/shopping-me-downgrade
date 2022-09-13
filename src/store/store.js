@@ -12,11 +12,14 @@ const loggerMiddleware = (store) => (next) => (action) => {
     console.log("currentState", store.getState());
 
     next(action);
+    console.log("next state: ", store.getState());
 }
 
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(
+const middleWares_temp = [process.env.NODE_ENV === 'development' && logger].filter(
     Boolean
 );
+
+const middleWares = [loggerMiddleware]
 
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
