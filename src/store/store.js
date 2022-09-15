@@ -23,6 +23,8 @@ const persistConfig = {
     blacklist: ["user"]
 }
 
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 const middleWares_temp = [process.env.NODE_ENV === 'development' && logger].filter(
     Boolean
 );
@@ -31,4 +33,6 @@ const middleWares = [loggerMiddleware]
 
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
-export const store = createStore(rootReducer, undefined, composedEnhancers);
+export const store = createStore(persistedReducer, undefined, composedEnhancers);
+
+export const persistor = persistStore(store)
