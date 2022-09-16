@@ -17,7 +17,7 @@ const middleWares_temp = [process.env.NODE_ENV === 'development' && logger].filt
     Boolean
 );
 
-const middleWares = [logger]
+const middleWares = [process.env.NODE_ENV === 'development' && logger]
 
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
