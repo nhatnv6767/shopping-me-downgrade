@@ -3,6 +3,7 @@ import {persistStore, persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage"
 import logger from "redux-logger"
 import {rootReducer} from './root-reducer';
+import thunk from "redux-thunk";
 
 
 const persistConfig = {
@@ -13,13 +14,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean)
-
-const thunkMiddleware = (store) => (next) => (action) => {
-    if (typeof (action) === 'function') {
-        action();
-    }
-}
+const middleWares = [process.env.NODE_ENV === 'development' && logger, thunk].filter(Boolean)
 
 const composeEnhancer = (
     process.env.NODE_ENV
