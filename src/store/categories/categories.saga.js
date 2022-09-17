@@ -13,6 +13,10 @@ export const fetchCategoriesAsync = () => async (dispatch) => {
     }
 }
 
+export function* onFetchCategories(){
+    yield takeLatest(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, )
+}
+
 export function* categoriesSaga(){
     yield all([])
 }
