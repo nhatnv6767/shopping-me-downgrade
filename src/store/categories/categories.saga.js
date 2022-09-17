@@ -3,8 +3,8 @@ import {fetchCategoriesFailed, fetchCategoriesSuccess} from "./categories.action
 import {takeLatest, all, call, put} from "redux-saga/effects"
 import {CATEGORIES_ACTION_TYPES} from "./categories.types"
 
-export const fetchCategoriesAsync = () => async (dispatch) => {
-    dispatch(fetchCategoriesStart())
+
+export function* fetchCategoriesAsync(){
     try {
         const categoriesArray = await getCategoriesAndDocuments('categories');
         dispatch(fetchCategoriesSuccess(categoriesArray))
