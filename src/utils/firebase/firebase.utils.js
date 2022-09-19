@@ -123,7 +123,8 @@ export const getCurrentUser = () => {
             (userAuth) => {
                 unsubscribe();
                 resolve(userAuth);
-            }
+            },
+            reject
         )
     })
 }
