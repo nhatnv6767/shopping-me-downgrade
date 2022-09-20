@@ -1,13 +1,16 @@
 import {takeLatest, put, all, call} from 'redux-saga/effects'
 import {USER_ACTION_TYPES} from "./user.types"
 import {createUserDocumentFromAuth, getCurrentUser} from "../../utils/firebase/firebase.utils";
-import {signInFailed} from "./user.action";
+import {signInFailed, signInSuccess} from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
     try {
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
-        console.log(userSnapshot)
-        console.log(userSnapshot.data())
+
+        yield put(signInSuccess({
+            id: userSnapshot.id,
+            ...userSnapshot.data()
+        }))
     } catch (error) {
         yield put(signInFailed(error))
     }
