@@ -13,4 +13,4 @@ export const emailSignInStart = (email, password) => createAction(USER_ACTION_TY
     {email, password});
 
 export const signInSuccess = (user) => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user);
-export const signInFailed = (error) => createAction(USER_ACTION_TYPES.SIGN_IN_FAILURE, error);
+export const signInFailed = (error) => createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, error);
