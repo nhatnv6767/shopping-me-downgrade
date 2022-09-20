@@ -8,7 +8,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
         console.log(userSnapshot)
         console.log(userSnapshot.data())
-    } catch (e) {
+    } catch (error) {
         yield put(signInFailed(error))
     }
 }
@@ -18,7 +18,7 @@ export function* isUserAuthenticated() {
         const userAuth = yield call(getCurrentUser)
         if (!userAuth) return;
         yield call(getSnapshotFromUserAuth, userAuth)
-    } catch (e) {
+    } catch (error) {
         yield put(signInFailed(error))
     }
 }
