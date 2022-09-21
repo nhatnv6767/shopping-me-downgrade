@@ -1,6 +1,11 @@
 import {takeLatest, put, all, call} from 'redux-saga/effects'
 import {USER_ACTION_TYPES} from "./user.types"
-import {createUserDocumentFromAuth, getCurrentUser, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
+import {
+    createUserDocumentFromAuth,
+    getCurrentUser,
+    signInAuthUserWithEmailAndPassword,
+    signInWithGooglePopup
+} from "../../utils/firebase/firebase.utils";
 import {signInFailed, signInSuccess} from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
@@ -25,11 +30,16 @@ export function* signInWithGoogle() {
     }
 }
 
-export function* signInWithEmail(action) {
+export function* signInWithEmail({payload: {email, password}}) {
     try {
-
+        const {user} = yield call(
+            signInAuthUserWithEmailAndPassword,
+            email,
+            password
+        )
+        yield call(getSnapshotFromUserAuth, user)
     } catch (error) {
-
+        yield put(signInFailed(error))
     }
 }
 
