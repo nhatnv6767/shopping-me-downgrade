@@ -25,6 +25,7 @@ export function* signInWithGoogle() {
     }
 }
 
+
 export function* isUserAuthenticated() {
     try {
         const userAuth = yield call(getCurrentUser)
@@ -41,6 +42,10 @@ export function* onGoogleSignInStart() {
 
 export function* onCheckUserSession() {
     yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated)
+}
+
+export function* onEmailSignInStart() {
+    yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail)
 }
 
 export function* userSagas() {
