@@ -25,6 +25,14 @@ export function* signInWithGoogle() {
     }
 }
 
+export function* signInWithEmail(action) {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
 
 export function* isUserAuthenticated() {
     try {
