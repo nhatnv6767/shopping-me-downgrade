@@ -54,6 +54,14 @@ export function* isUserAuthenticated() {
     }
 }
 
+export function* signUp({payload: {email, password, displayName}}) {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
 export function* onGoogleSignInStart() {
     yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
