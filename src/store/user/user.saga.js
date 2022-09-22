@@ -7,7 +7,7 @@ import {
     signInAuthUserWithEmailAndPassword,
     signInWithGooglePopup
 } from "../../utils/firebase/firebase.utils";
-import {signInFailed, signInSuccess, signupSuccess} from "./user.action";
+import {signInFailed, signInSuccess, signUpFailed, signupSuccess} from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
     try {
@@ -58,9 +58,9 @@ export function* isUserAuthenticated() {
 export function* signUp({payload: {email, password, displayName}}) {
     try {
         const {user} = yield call(createAuthUserWithEmailAndPassword, email, password)
-        yield put(signupSuccess)
+        yield put(signupSuccess(user, {displayName}))
     } catch (error) {
-
+        yield put(signUpFailed(error))
     }
 }
 
@@ -93,5 +93,7 @@ export function* userSagas() {
         call(onCheckUserSession),
         call(onGoogleSignInStart),
         call(onEmailSignInStart),
+        call(onSignUpStart),
+        call(onSignUpSuccess),
     ])
 }
