@@ -64,6 +64,10 @@ export function* signUp({payload: {email, password, displayName}}) {
     }
 }
 
+export function* signInAfterSignUp({payload: {user, additionalDetails}}) {
+    yield call(getSnapshotFromUserAuth, user, additionalDetails)
+}
+
 export function* onGoogleSignInStart() {
     yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
@@ -78,6 +82,10 @@ export function* onEmailSignInStart() {
 
 export function* onSignUpStart() {
     yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp)
+}
+
+export function* onSignUpSuccess() {
+    yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp)
 }
 
 export function* userSagas() {
