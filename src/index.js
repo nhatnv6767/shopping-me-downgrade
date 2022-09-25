@@ -8,6 +8,7 @@ import {persistor, store} from './store/store';
 
 import './index.scss';
 import {PersistGate} from "redux-persist/integration/react";
+import {Elements} from "@stripe/react-stripe-js";
 
 const rootElement = document.getElementById('root');
 
@@ -16,7 +17,9 @@ render(
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <BrowserRouter>
-                    <App/>
+                    <Elements stripe={}>
+                        <App/>
+                    </Elements>
                 </BrowserRouter>
             </PersistGate>
         </Provider>
