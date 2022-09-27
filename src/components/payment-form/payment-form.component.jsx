@@ -20,7 +20,7 @@ const PaymentForm = () => {
             body: JSON.stringify({amount: 10000})
         }).then(res => res.json());
 
-        console.log(response)
+        const {paymentIntent: {client_secret}} = response
     }
     return (
         <PaymentFormContainer>
