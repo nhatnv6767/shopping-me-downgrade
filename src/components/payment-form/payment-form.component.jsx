@@ -31,6 +31,14 @@ const PaymentForm = () => {
                 }
             }
         })
+
+        if (paymentResult.error) {
+            alert(paymentResult.error)
+        } else {
+            if (paymentResult.paymentIntent.status === "succeeded") {
+                alert("Payment Successful")
+            }
+        }
     }
     return (
         <PaymentFormContainer>
