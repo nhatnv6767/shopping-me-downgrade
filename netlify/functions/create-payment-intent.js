@@ -24,4 +24,3 @@ exports.handler = async (event) => {
         }
     }
 }
-// in commit command - install in global
